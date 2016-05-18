@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sy.dao.UserMapper">
+	<resultMap id="BaseResultMap" type="sy.model.User">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="createdatetime" property="createdatetime"
+			jdbcType="TIMESTAMP" />
+		<result column="updatedatetime" property="updatedatetime"
+			jdbcType="TIMESTAMP" />
+		<result column="loginname" property="loginname" jdbcType="VARCHAR" />
+		<result column="pwd" property="pwd" jdbcType="VARCHAR" />
+		<result column="salt" property="salt" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="sex" property="sex" jdbcType="VARCHAR" />
+		<result column="age" property="age" jdbcType="INTEGER" />
+		<result column="photo" property="photo" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, createdatetime, updatedatetime, loginname, pwd, salt,
+		name, sex, age,
+		photo
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from syuser
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from syuser
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="sy.model.User">
+		insert into syuser (id,
+		createdatetime, updatedatetime,
+		loginname, pwd, salt,
+		name, sex, age,
+		photo
+		)
+		values (#{id,jdbcType=VARCHAR},
+		#{createdatetime,jdbcType=TIMESTAMP},
+		#{updatedatetime,jdbcType=TIMESTAMP},
+		#{loginname,jdbcType=VARCHAR},
+		#{pwd,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
+		#{age,jdbcType=INTEGER}, #{photo,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="sy.model.User">
+		insert into syuser
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="createdatetime != null">
+				createdatetime,
+			</if>
+			<if test="updatedatetime != null">
+				updatedatetime,
+			</if>
+			<if test="loginname != null">
+				loginname,
+			</if>
+			<if test="pwd != null">
+				pwd,
+			</if>
+			<if test="salt != null">
+				salt,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="sex != null">
+				sex,
+			</if>
+			<if test="age != null">
+				age,
+			</if>
+			<if test="photo != null">
+				photo,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="createdatetime != null">
+				#{createdatetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatedatetime != null">
+				#{updatedatetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="loginname != null">
+				#{loginname,jdbcType=VARCHAR},
+			</if>
+			<if test="pwd != null">
+				#{pwd,jdbcType=VARCHAR},
+			</if>
+			<if test="salt != null">
+				#{salt,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="age != null">
+				#{age,jdbcType=INTEGER},
+			</if>
+			<if test="photo != null">
+				#{photo,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="sy.model.User">
+		update syuser
+		<set>
+			<if test="createdatetime != null">
+				createdatetime = #{createdatetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatedatetime != null">
+				updatedatetime = #{updatedatetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="loginname != null">
+				loginname = #{loginname,jdbcType=VARCHAR},
+			</if>
+			<if test="pwd != null">
+				pwd = #{pwd,jdbcType=VARCHAR},
+			</if>
+			<if test="salt != null">
+				salt = #{salt,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				sex = #{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="age != null">
+				age = #{age,jdbcType=INTEGER},
+			</if>
+			<if test="photo != null">
+				photo = #{photo,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="sy.model.User">
+		update syuser
+		set
+		createdatetime = #{createdatetime,jdbcType=TIMESTAMP},
+		updatedatetime =
+		#{updatedatetime,jdbcType=TIMESTAMP},
+		loginname =
+		#{loginname,jdbcType=VARCHAR},
+		pwd = #{pwd,jdbcType=VARCHAR},
+		salt =
+		#{salt,jdbcType=VARCHAR},
+		name = #{name,jdbcType=VARCHAR},
+		sex =
+		#{sex,jdbcType=VARCHAR},
+		age = #{age,jdbcType=INTEGER},
+		photo =
+		#{photo,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+
+
+	<select id="getAll" resultMap="BaseResultMap">
+		SELECT
+		syuser.id,
+		syuser.createdatetime,
+		syuser.updatedatetime,
+		syuser.loginname,
+		syuser.pwd,
+		syuser.salt,
+		syuser.`name`,
+		syuser.sex,
+		syuser.age,
+		syuser.photo
+		FROM
+		syuser
+	</select>
+
+
+	<resultMap type="sy.model.User" id="UserResultMap" extends="BaseResultMap">
+		<collection property="roles" ofType="sy.model.Role"
+			javaType="list">
+			<id property="id" column="role_id" />
+			<result property="name" column="role_name" />
+		</collection>
+
+	</resultMap>
+	<select id="getAll2" resultMap="UserResultMap">
+		SELECT
+		syuser.id,
+		syuser.createdatetime,
+		syuser.updatedatetime,
+		syuser.loginname,
+		syuser.pwd,
+		syuser.salt,
+		syuser.`name`,
+		syuser.sex,
+		syuser.age,
+		syuser.photo,
+		userrole.id,
+		userrole.uid,
+		userrole.rid,
+		syrole.id role_id,
+		syrole.`name` role_name
+		FROM
+		syuser
+		INNER JOIN userrole ON syuser.id = userrole.uid
+		INNER JOIN syrole ON userrole.rid = syrole.id
+
+	</select>
+
+</mapper>
