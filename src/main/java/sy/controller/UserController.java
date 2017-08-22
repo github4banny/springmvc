@@ -32,6 +32,7 @@ public class UserController {
 	public String showUser(String id, HttpServletRequest request) {
 		
 		System.out.println(id);
+		System.out.println(JSON.toJSON(request));
 		User u = userService.getUserById(id);
 		request.setAttribute("user", u);
 		return "showUser";
