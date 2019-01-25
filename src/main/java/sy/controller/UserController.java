@@ -30,7 +30,6 @@ public class UserController {
 
 	@RequestMapping("showuser")
 	public String showUser(String id, HttpServletRequest request) {
-		
 		System.out.println(id);
 		System.out.println(JSON.toJSON(request));
 		User u = userService.getUserById(id);
